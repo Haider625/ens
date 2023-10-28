@@ -3,11 +3,11 @@ const ens = require('../modl/ens');
 const ense = require('../modl/data/ens');
 const controler = {
   getAll:async (req, res) => {
-    const lost = await ens.find();
-    if (lost){
-        res.status(200).json({"lost" : lost})
+    const post = await ens.find();
+    if (post){
+        res.status(200).json({"post" : post})
     }else{
-        res.status(404).json({Message : "lost_get not working"})
+        res.status(404).json({Message : "post_get not working"})
     }
 },
     getOne: (req, res) => {
@@ -19,17 +19,17 @@ const controler = {
         }
       },
       addOne:async (req, res) => {
-        const lost = await new ens({
+        const post = await new ens({
           name:req.body.name,
           country:req.body.country, 
           typeOf: req.body.typeOf,
           Value:req.body.Value,
           createdOn:req.body.createdOn,
       }).save()
-      if (lost){
-          res.status(200).json({"lost" : lost})
+      if (post){
+          res.status(200).json({"post" : post})
       }else{
-          res.status(404).json({Message : "lost_insert not working"})
+          res.status(404).json({Message : "post_insert not working"})
       }
   },
 
