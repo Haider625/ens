@@ -1,6 +1,5 @@
 
 const ens = require('../modl/ens');
-const ense = require('../modl/data/ens');
 const controler = {
   getAll:async (req, res) => {
     const post = await ens.find();
@@ -10,14 +9,15 @@ const controler = {
         res.status(404).json({Message : "post_get not working"})
     }
 },
-    getOne: (req, res) => {
-        const post = ens.find((post) => post.id === parseInt(req.params.id));
-        if (post) {
-          res.status(200).json({ post: post });
-        } else {
-          res.status(404).json({ message: "post not found" });
+   getOne : async (req, res) => {
+        const Id = req.params.id;
+        const Get = await ens.findById(Id);
+        if (Get){
+            res.status(200).json({"lost" : Get})
+        }else{
+            res.status(404).json({Message : "lost_getone not working"})
         }
-      },
+    },
       addOne:async (req, res) => {
         const post = await new ens({
           name:req.body.name,
@@ -33,16 +33,15 @@ const controler = {
       }
   },
 
-      deleteOne: (req, res) => {
-        const post = ens.find((post) => post.id === parseInt(req.params.id));
-        if (post) {
-          const index = ens.indexOf(post);
-          ens.splice(index, 1);
-          res.status(200).json({ message: "post is deleted" });
-        } else {
-          res.status(404).json({ message: "post not found" });
-        }
-      },
+  deleteone : async (req,res) => {
+    const Id = req.params.id;
+    const del = await ens.findByIdAndDelete(Id);
+    if (del){
+        res.status(200).json({Message : "post is deleted"})
+    }else{
+        res.status(404).json({Message : "post_delet not working"})
+    }
+},
       updateOne: (req, res) => {
         const post = ens.find((post) => post.id === parseInt(req.params.id));
         if (post) {

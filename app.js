@@ -2,7 +2,6 @@ const express = require("express");
 const body_parser = require('body-parser');
 const rout = require("./rout/ens")
 const db = require('./config/db')
-const path =require("path")
 
 const app = express();
 
