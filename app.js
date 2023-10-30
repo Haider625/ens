@@ -10,6 +10,14 @@ const PORT =process.env.PORT || 3000;
 app.use([body_parser.urlencoded({extended :true}),express.json()])
 app.use("/ens",rout)
 
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:tru
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions))
 
 
 app.listen(PORT,()=>{
